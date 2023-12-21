@@ -24,7 +24,7 @@ class App extends Component {
     render() {
         return (
             <div className="App">
-                <MyNav home="home" about="Abous Us" browse="Find Us" />
+                <MyNav home="home" about="Abous Us" browse="Find Us Now" />
                 <Welcome welcome="Benvenuto nella libreria super Top!" />
                 {/* <AllTheBooks /> */}
                 <BookList ListOfBooks={ListOfBooks} />

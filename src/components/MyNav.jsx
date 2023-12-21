@@ -10,13 +10,13 @@ const MyNav = (props) => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link className="text-center" href="#">
+                        <Nav.Link className="text-center fw-bold" href="#">
                             {props.home}
                         </Nav.Link>
-                        <Nav.Link className="text-center" href="#">
+                        <Nav.Link className="text-center fw-bold" href="#">
                             {props.about}
                         </Nav.Link>
-                        <Nav.Link className="text-center" href="#">
+                        <Nav.Link className="text-center fw-bold" href="#">
                             {props.browse}
                         </Nav.Link>
                     </Nav>
