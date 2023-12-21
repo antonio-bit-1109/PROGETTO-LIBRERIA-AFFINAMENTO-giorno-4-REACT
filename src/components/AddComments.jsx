@@ -14,7 +14,7 @@ class AddComments extends Component {
     handleSubmit = (event) => {
         event.preventDefault();
         /* fai la fetch??  */
-        const state = this.state;
+        const { sendComment } = this.state; // Fix here
 
         const options = {
             method: "POST",
@@ -23,7 +23,7 @@ class AddComments extends Component {
                 Authorization:
                     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxY2JhMDBkOGEyMDAwMThhNDhhNDAiLCJpYXQiOjE3MDMxNzE4OTYsImV4cCI6MTcwNDM4MTQ5Nn0.zBILXX-OLo51DVDc-vX9T93TuYd9YREBLJ0U4sOMIy8",
             },
-            body: JSON.stringify(state),
+            body: JSON.stringify(sendComment),
         };
 
         fetch("https://striveschool-api.herokuapp.com/api/comments/", options).then((response) => {
