@@ -34,8 +34,12 @@
 }
 
 .img-format {
-    max-width: 250px;
+    width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
+}
+
+.palegreen {
+    background-color: rgb(182, 233, 182);
 }

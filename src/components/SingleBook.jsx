@@ -59,9 +59,9 @@ class SingleBook extends Component {
 
         return (
             <Card
-                className="h-100 text-center"
+                className="h-100 text-center palegreen"
                 style={{
-                    border: this.state.selected === true ? "3px solid blue" : "1px solid black",
+                    border: this.state.selected === true ? "2px solid red" : "1px solid black",
                     padding: this.state.selected === true ? "0.5rem" : "none",
                 }}
                 onClick={() =>

@@ -67,7 +67,7 @@ class AddComments extends Component {
                         rows={1}
                     />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Group className="mb-3 invisible" controlId="exampleForm.ControlTextarea1">
                     <Form.Label>Id libro: {book.asin}</Form.Label>
                     <Form.Control value={book.asin} type="text" rows={3} readOnly />
                 </Form.Group>
