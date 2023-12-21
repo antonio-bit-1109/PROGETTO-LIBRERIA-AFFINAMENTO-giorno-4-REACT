@@ -1,5 +1,6 @@
 import { Component } from "react";
 import CommentList from "./CommentList";
+import AddComments from "./AddComments";
 
 class CommentArea extends Component {
     render() {
@@ -7,13 +8,16 @@ class CommentArea extends Component {
         console.log("contenuto di comments", comments);
 
         const { show } = this.props;
+        const { book } = this.props;
 
         return (
             /* commentList  */
 
-            <CommentList show={show} comments={comments} />
-
-            /* AddComments */
+            <>
+                {" "}
+                <CommentList show={show} comments={comments} />
+                <AddComments book={book} />
+            </>
         );
     }
 }

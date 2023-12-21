@@ -55,6 +55,8 @@ class SingleBook extends Component {
     }
 
     render() {
+        const { book } = this.props;
+
         return (
             <Card
                 className="h-100 text-center"
@@ -85,7 +87,7 @@ class SingleBook extends Component {
                 </Card.Body>
 
                 {/* comment Area  */}
-                <CommentArea comments={this.state.myComments} show={this.state.showComments} />
+                <CommentArea comments={this.state.myComments} show={this.state.showComments} book={book} />
             </Card>
         );
     }
