@@ -16,7 +16,7 @@ class BookList extends Component {
             <Row>
                 {" "}
                 <Container>
-                    <Col lg={6} className="m-auto">
+                    <Col lg={6} className="m-auto ">
                         <input
                             className="w-100"
                             type="text"
@@ -26,7 +26,7 @@ class BookList extends Component {
                         />
                     </Col>
                 </Container>
-                {ListOfBooks.scifi
+                {ListOfBooks.fantasy
                     .filter((filteredBook) => filteredBook.title.toLowerCase().includes(this.state.Myresearch))
                     .map((book, index) => (
                         <Col key={`num-${index}`} xs={12} md={6} lg={4} className="my-2 p-3">

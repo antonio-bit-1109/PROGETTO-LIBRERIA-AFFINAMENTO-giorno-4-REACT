@@ -2,7 +2,7 @@ import { Alert } from "react-bootstrap";
 
 const Welcome = (props) => {
     return (
-        <Alert variant="success" className="mb-2 text-center">
+        <Alert variant="success" className="mb-2 text-center mt-5">
             <Alert.Heading className="fs-3">Hey, nice to see you</Alert.Heading>
             <p className="fs-5">{props.welcome}</p>
             <hr />

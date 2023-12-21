@@ -26,9 +26,13 @@ class AddComments extends Component {
             body: JSON.stringify(sendComment),
         };
 
-        fetch("https://striveschool-api.herokuapp.com/api/comments/", options).then((response) => {
-            console.log("PROBLEMA IN VISTA", response.status);
-        });
+        fetch("https://striveschool-api.herokuapp.com/api/comments/", options)
+            .then((response) => {
+                console.log("ESITO ESITO ESITO ", response.status);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     };
 
     insertAsin = (event) => {
