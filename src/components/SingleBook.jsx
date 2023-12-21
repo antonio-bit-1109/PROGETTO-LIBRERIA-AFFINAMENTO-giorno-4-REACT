@@ -1,5 +1,4 @@
 import Card from "react-bootstrap/Card";
-import ButtonComponent from "./ButtonComponent";
 import { Badge } from "react-bootstrap";
 import { Component } from "react";
 import CommentArea from "./CommentArea";
@@ -82,8 +81,6 @@ class SingleBook extends Component {
                         </Badge>
                     </div>
                     <Card.Text className="fs-3 text-primary">{this.props.book.price}$</Card.Text>
-                    <ButtonComponent theme="success" Btncontent="Add To Cart" />
-                    <ButtonComponent theme="danger" Btncontent="Eliminate" />
                 </Card.Body>
 
                 {/* comment Area  */}
