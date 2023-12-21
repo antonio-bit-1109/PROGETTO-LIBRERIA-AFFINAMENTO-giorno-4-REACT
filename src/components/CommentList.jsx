@@ -11,7 +11,7 @@ const CommentList = (props) => {
             {comments.map((singleArrComm, index) => (
                 <div className="mb-4 border border-success" key={`arrId${index}`}>
                     <ListGroup.Item>{singleArrComm.comment}</ListGroup.Item>
-                    <ListGroup.Item>{singleArrComm.rate}</ListGroup.Item>
+                    <ListGroup.Item>{singleArrComm.rate}⭐</ListGroup.Item>
                     <ListGroup.Item>{singleArrComm.author}</ListGroup.Item>
                     <ListGroup.Item>{singleArrComm.createdAt}</ListGroup.Item>
                 </div>
