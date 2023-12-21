@@ -27,9 +27,29 @@ class CommentList extends Component {
         }
     }
 
+    async handleGetToApi(id) {
+        try {
+            const options = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization:
+                        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxY2JhMDBkOGEyMDAwMThhNDhhNDAiLCJpYXQiOjE3MDMxNzE4OTYsImV4cCI6MTcwNDM4MTQ5Nn0.zBILXX-OLo51DVDc-vX9T93TuYd9YREBLJ0U4sOMIy8",
+                },
+            };
+
+            const response = await fetch(`https://striveschool-api.herokuapp.com/api/comments/${id}`, options);
+
+            console.log(response);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
     render() {
         const { show } = this.props;
         const { comments } = this.props;
+        const { book } = this.props;
 
         return (
             <div>
@@ -40,6 +60,7 @@ class CommentList extends Component {
                                 onClick={async () => {
                                     await this.setState({ id: singleArrComm._id });
                                     await this.handleDeleteComment();
+                                    await this.handleGetToApi(book.asin);
                                 }}
                             >
                                 Cancellami

@@ -15,7 +15,7 @@ class CommentArea extends Component {
 
             <>
                 {" "}
-                <CommentList show={show} comments={comments} />
+                <CommentList show={show} comments={comments} book={book} />
                 <AddComments book={book} />
             </>
         );
