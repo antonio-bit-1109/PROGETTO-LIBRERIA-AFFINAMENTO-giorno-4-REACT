@@ -2,12 +2,13 @@ import Card from "react-bootstrap/Card";
 import ButtonComponent from "./ButtonComponent";
 import { Badge } from "react-bootstrap";
 import { Component } from "react";
+import CommentArea from "./CommentArea";
 
 class SingleBook extends Component {
     state = {
         selected: false,
         showComments: false,
-        myComments: {},
+        myComments: [] /* ci infilo i dati dalla fetch  */,
     };
 
     /* fuori render faccio la fetch  */
@@ -18,11 +19,11 @@ class SingleBook extends Component {
             headers: {
                 "Content-Type": "application/json",
                 Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxY2JhMDBkOGEyMDAwMThhNDhhNDAiLCJpYXQiOjE3MDMxNjM3ODAsImV4cCI6MTcwNDM3MzM4MH0.IXMDLK77lApMvZrdst6UGqxRJZxAQZ8pYcvY87alkv8",
+                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxY2JhMDBkOGEyMDAwMThhNDhhNDAiLCJpYXQiOjE3MDMxNzE4OTYsImV4cCI6MTcwNDM4MTQ5Nn0.zBILXX-OLo51DVDc-vX9T93TuYd9YREBLJ0U4sOMIy8",
             },
         };
 
-        fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.asin}`, options)
+        fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.book.asin}`, options)
             .then((response) => {
                 console.log(response);
                 if (!response.ok) {
@@ -36,16 +37,16 @@ class SingleBook extends Component {
                     if (response.status > 500 && response.status < 600) {
                         throw new Error("qualquadra non cosa lato server???");
                     }
-                } else {
+                } else if (response.ok) {
                     return response.json();
                 }
             })
             .then((MyData) => {
                 console.log(MyData);
                 /* mi porto il dato nello stato */
-                /* this.setState({
-                    myComments: data,
-                }); */
+                this.setState({
+                    myComments: MyData,
+                });
             })
 
             .catch((error) => {
@@ -84,20 +85,7 @@ class SingleBook extends Component {
                 </Card.Body>
 
                 {/* comment Area  */}
-                <Card className={this.state.showComments ? "d-block" : "d-none"}>
-                    <Card.Header>Commenti:</Card.Header>
-                    <Card.Body>
-                        <blockquote className="blockquote mb-0">
-                            <p>
-                                {" "}
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.{" "}
-                            </p>
-                            <footer className="blockquote-footer">
-                                Someone famous in <cite title="Source Title">Source Title</cite>
-                            </footer>
-                        </blockquote>
-                    </Card.Body>
-                </Card>
+                <CommentArea comments={this.state.myComments} show={this.state.showComments} />
             </Card>
         );
     }
