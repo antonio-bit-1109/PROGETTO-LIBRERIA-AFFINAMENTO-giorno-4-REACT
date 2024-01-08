@@ -23,7 +23,7 @@ const SingleBook = (props) => {
                 };
 
                 const response = await fetch(
-                    `https://striveschool-api.herokuapp.com/api/comments/${props.book.asin}`,
+                    `https://striveschool-api.herokuapp.com/api/comments/${book.asin}`,
                     options
                 );
 
@@ -48,7 +48,7 @@ const SingleBook = (props) => {
         };
 
         fetchData();
-    }, [props.book.asin]);
+    }, [book.asin]);
 
     return (
         <Card
@@ -66,21 +66,21 @@ const SingleBook = (props) => {
                 {" "}
                 <Card.Img
                     variant="top"
-                    src={props.book.img}
+                    src={book.img}
                     className="img-format"
                     style={{ height: "300px", objectFit: "contain" }}
                 />
             </div>
 
             <Card.Body className="h-auto d-flex flex-column justify-content-center">
-                <Card.Title>{props.book.title}</Card.Title>{" "}
+                <Card.Title>{book.title}</Card.Title>{" "}
                 <div>
                     <Badge bg={"danger"} className="p-2">
                         {" "}
-                        {props.book.category}{" "}
+                        {book.category}{" "}
                     </Badge>
                 </div>
-                <Card.Text className="fs-3 text-primary">{props.book.price}$</Card.Text>
+                <Card.Text className="fs-3 text-primary">{book.price}$</Card.Text>
             </Card.Body>
 
             {/* comment Area  */}
