@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { Badge } from "react-bootstrap";
-import CommentArea from "./CommentArea";
 
 const SingleBook = (props) => {
-    const { book } = props;
+    const {
+        book,
+        showComments,
+        setShowComments,
+        myComments,
+        setMyComments,
+        handlesetsingleMappedBook,
+        selected,
+        setSelected,
+    } = props;
 
-    const [selected, setSelected] = useState(false);
-    const [showComments, setShowComments] = useState(false);
-    const [myComments, setMyComments] = useState([]);
+    handlesetsingleMappedBook(book);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -84,7 +90,6 @@ const SingleBook = (props) => {
             </Card.Body>
 
             {/* comment Area  */}
-            <CommentArea comments={myComments} show={showComments} book={book} />
         </Card>
     );
 };
