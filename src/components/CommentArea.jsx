@@ -1,25 +1,19 @@
-import { Component } from "react";
 import CommentList from "./CommentList";
 import AddComments from "./AddComments";
 
-class CommentArea extends Component {
-    render() {
-        const { comments } = this.props;
-        console.log("contenuto di comments", comments);
+const CommentArea = (props) => {
+    const { comments, show, book } = props;
+    console.log("contenuto di comments", comments);
 
-        const { show } = this.props;
-        const { book } = this.props;
+    return (
+        /* commentList  */
 
-        return (
-            /* commentList  */
-
-            <>
-                {" "}
-                <CommentList show={show} comments={comments} book={book} />
-                <AddComments book={book} />
-            </>
-        );
-    }
-}
+        <>
+            {" "}
+            <CommentList show={show} comments={comments} book={book} />
+            <AddComments book={book} />
+        </>
+    );
+};
 
 export default CommentArea;

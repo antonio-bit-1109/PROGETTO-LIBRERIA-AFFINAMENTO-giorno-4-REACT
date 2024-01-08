@@ -26,7 +26,7 @@ class App extends Component {
             <div className="App">
                 <MyNav home="home" about="Abous Us" browse="Find Us Now" />
                 <Welcome welcome="Benvenuto nella libreria super Top!" />
-                {/* <AllTheBooks /> */}
+
                 <BookList ListOfBooks={ListOfBooks} />
                 <MyFooter testo_par="questo è del testo passato tramite props" />
             </div>

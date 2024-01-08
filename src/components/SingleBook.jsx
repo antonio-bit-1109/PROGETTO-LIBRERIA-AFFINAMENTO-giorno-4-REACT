@@ -1,93 +1,92 @@
+import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/Card";
 import { Badge } from "react-bootstrap";
-import { Component } from "react";
 import CommentArea from "./CommentArea";
 
-class SingleBook extends Component {
-    state = {
-        selected: false,
-        showComments: false,
-        myComments: [] /* ci infilo i dati dalla fetch  */,
-    };
+const SingleBook = (props) => {
+    const { book } = props;
 
-    /* fuori render faccio la fetch  */
+    const [selected, setSelected] = useState(false);
+    const [showComments, setShowComments] = useState(false);
+    const [myComments, setMyComments] = useState([]);
 
-    componentDidMount() {
-        const options = {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization:
-                    "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxY2JhMDBkOGEyMDAwMThhNDhhNDAiLCJpYXQiOjE3MDMxNzE4OTYsImV4cCI6MTcwNDM4MTQ5Nn0.zBILXX-OLo51DVDc-vX9T93TuYd9YREBLJ0U4sOMIy8",
-            },
-        };
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const options = {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization:
+                            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTcxY2JhMDBkOGEyMDAwMThhNDhhNDAiLCJpYXQiOjE3MDQ3MjIzMTIsImV4cCI6MTcwNTkzMTkxMn0.o6QM1stCifQGBTxb7WO5estJemL28Q_NjVcVHCLduO0",
+                    },
+                };
 
-        fetch(`https://striveschool-api.herokuapp.com/api/comments/${this.props.book.asin}`, options)
-            .then((response) => {
-                console.log(response);
+                const response = await fetch(
+                    `https://striveschool-api.herokuapp.com/api/comments/${props.book.asin}`,
+                    options
+                );
+
                 if (!response.ok) {
                     if (response.status > 400 && response.status < 500) {
                         if (response.status === 429) {
                             throw new Error("429 INFAME, PER TE SOLO LE LAME!");
                         } else {
-                            throw new Error("HAI FATTO LA CAPPELLATA , CONTROLLA again");
+                            throw new Error("HAI FATTO LA CAPPELLATA, CONTROLLA again");
                         }
                     }
                     if (response.status > 500 && response.status < 600) {
                         throw new Error("qualquadra non cosa lato server???");
                     }
-                } else if (response.ok) {
-                    return response.json();
+                } else {
+                    const MyData = await response.json();
+                    setMyComments(MyData);
                 }
-            })
-            .then((MyData) => {
-                console.log(MyData);
-                /* mi porto il dato nello stato */
-                this.setState({
-                    myComments: MyData,
-                });
-            })
-
-            .catch((error) => {
+            } catch (error) {
                 console.log(error);
-            });
-    }
+            }
+        };
 
-    render() {
-        const { book } = this.props;
+        fetchData();
+    }, [props.book.asin]);
 
-        return (
-            <Card
-                className="h-100 text-center palegreen"
-                style={{
-                    border: this.state.selected === true ? "2px solid red" : "1px solid black",
-                    padding: this.state.selected === true ? "0.5rem" : "none",
-                }}
-                onClick={() =>
-                    this.setState({ selected: !this.state.selected, showComments: !this.state.showComments })
-                }
-            >
-                <div className="h-100">
-                    {" "}
-                    <Card.Img variant="top" src={this.props.book.img} className="img-format" />
+    return (
+        <Card
+            className="h-100 text-center palegreen"
+            style={{
+                border: selected ? "2px solid red" : "1px solid black",
+                padding: selected ? "0.5rem" : "none",
+            }}
+            onClick={() => {
+                setSelected(!selected);
+                setShowComments(!showComments);
+            }}
+        >
+            <div className="h-100">
+                {" "}
+                <Card.Img
+                    variant="top"
+                    src={props.book.img}
+                    className="img-format"
+                    style={{ height: "300px", objectFit: "contain" }}
+                />
+            </div>
+
+            <Card.Body className="h-auto d-flex flex-column justify-content-center">
+                <Card.Title>{props.book.title}</Card.Title>{" "}
+                <div>
+                    <Badge bg={"danger"} className="p-2">
+                        {" "}
+                        {props.book.category}{" "}
+                    </Badge>
                 </div>
+                <Card.Text className="fs-3 text-primary">{props.book.price}$</Card.Text>
+            </Card.Body>
 
-                <Card.Body className="h-auto d-flex flex-column justify-content-center">
-                    <Card.Title>{this.props.book.title}</Card.Title>{" "}
-                    <div>
-                        <Badge bg={"danger"} className="p-2">
-                            {" "}
-                            {this.props.book.category}{" "}
-                        </Badge>
-                    </div>
-                    <Card.Text className="fs-3 text-primary">{this.props.book.price}$</Card.Text>
-                </Card.Body>
-
-                {/* comment Area  */}
-                <CommentArea comments={this.state.myComments} show={this.state.showComments} book={book} />
-            </Card>
-        );
-    }
-}
+            {/* comment Area  */}
+            <CommentArea comments={myComments} show={showComments} book={book} />
+        </Card>
+    );
+};
 
 export default SingleBook;
