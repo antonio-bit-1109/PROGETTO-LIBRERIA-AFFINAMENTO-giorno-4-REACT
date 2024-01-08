@@ -33,7 +33,7 @@ const BookList = (props) => {
                             </Col>
                         ))}
                 </Col>
-                <Col xxl={12}>{/*  <CommentArea comments={myComments} show={showComments} book={book} /> */}</Col>
+                <Col xxl={12}></Col>
             </Row>
         </>
     );
